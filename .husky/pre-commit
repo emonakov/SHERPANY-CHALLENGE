@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn prettier && git add -u
+yarn eslint && yarn ts:check && yarn prettier && git add -u
