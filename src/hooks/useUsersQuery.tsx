@@ -18,7 +18,7 @@ const Interceptor = styled(InView)`
   position: absolute;
   width: 40px;
   height: 40px;
-  bottom: 100vh;
+  bottom: 300vh;
 `;
 
 interface QueryParams {

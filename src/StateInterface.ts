@@ -19,15 +19,18 @@ export interface UserInterface {
   };
   location: {
     street: {
-      number: 4527;
+      number: number;
       name: string;
     };
     city: string;
     state: string;
     country: string;
-    postcode: 7389;
+    postcode: number;
   };
   email: string;
+  login: {
+    username: string;
+  };
   dob: {
     date: string;
     age: number;
