@@ -1,5 +1,17 @@
+export interface UsersQueryResult {
+  results: UserInterface[];
+  info: {
+    results: number;
+    page: number;
+  };
+}
+
 export interface UserInterface {
   gender: string;
+  id: {
+    name: string;
+    value: string;
+  };
   name: {
     title: string;
     first: string;
@@ -31,6 +43,6 @@ export interface UserInterface {
 }
 
 export interface StateInterface {
-  usersList: UserInterface[] | [];
-  usersSearch: UserInterface[] | [];
+  usersList: UsersQueryResult[];
+  usersSearch: UsersQueryResult[];
 }

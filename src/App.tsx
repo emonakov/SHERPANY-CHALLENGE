@@ -1,34 +1,34 @@
 import { FC } from 'react';
-import { grommet, Box, Button, Grommet, Anchor, Text } from 'grommet';
+import styled from 'styled-components';
+import { grommet, Box, Grommet } from 'grommet';
+
+import { UserInterface } from './StateInterface';
+import { useUsersQuery } from './hooks/useUsersQuery';
+
+const BoxRelative = styled(Box)`
+  position: relative;
+`;
 
 const App: FC = () => {
+  const { data, Interceptor } = useUsersQuery({ nat: 'ES' });
+
   return (
     <Grommet full theme={grommet}>
-      <Box
-        direction="row-responsive"
+      <BoxRelative
+        direction="column"
         justify="center"
-        align="center"
         pad="xlarge"
-        background="dark-2"
+        background="dark-1"
         gap="medium"
       >
-        <Box
-          pad="large"
-          align="center"
-          background={{ color: 'light-2', opacity: 'strong' }}
-          round
-          gap="small"
-        >
-          <Text>TEST 1</Text>
-          <Anchor href="" label="Link" />
-          <Button label="Button" />
-        </Box>
-        <Box pad="large" align="center" background="dark-3" round gap="small">
-          <Text>TEST 2</Text>
-          <Anchor href="" label="Link" />
-          <Button label="Button" />
-        </Box>
-      </Box>
+        {data &&
+          data.map((page) =>
+            page.results.map((user: UserInterface) => (
+              <h4 key={user.id.value}>{user.email}</h4>
+            )),
+          )}
+        {Interceptor}
+      </BoxRelative>
     </Grommet>
   );
 };

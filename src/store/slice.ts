@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { InfiniteData } from 'react-query';
 
-import { StateInterface, UserInterface } from '../StateInterface';
+import { StateInterface, UsersQueryResult } from '../StateInterface';
 
-import { /* AppThunk, */ RootState } from './store';
+import { RootState } from './store';
 
 const initialState: StateInterface = {
   usersList: [],
@@ -15,19 +16,24 @@ export const slice = createSlice({
   reducers: {
     addUsersToList: (
       state: StateInterface,
-      action: PayloadAction<StateInterface>,
+      action: PayloadAction<InfiniteData<UsersQueryResult>>,
     ) => {
-      state.usersList = [...state.usersList, ...action.payload.usersList];
+      state.usersList = action.payload.pages;
     },
     searchUsers: (
       state: StateInterface,
       action: PayloadAction<{ term: string }>,
     ) => {
-      state.usersSearch = state.usersList.filter((user) =>
-        `${user.name.first} ${user.name.last}`
-          .toLowerCase()
-          .startsWith(action.payload.term.toLowerCase()),
-      );
+      state.usersSearch = state.usersList.map((page) => {
+        return {
+          ...page,
+          results: page.results.filter((user) => {
+            return `${user.name.first.toLowerCase()} ${user.name.last.toLowerCase()}`.startsWith(
+              action.payload.term.toLowerCase(),
+            );
+          }),
+        };
+      });
     },
     clearSearch: (state: StateInterface) => {
       state.usersSearch = [];
@@ -45,9 +51,9 @@ export const {
   clearUsers,
 } = slice.actions;
 
-export const selectUsers = (state: RootState): UserInterface[] =>
+export const selectUsers = (state: RootState): UsersQueryResult[] =>
   state.users.usersList;
-export const selectSearchedUsers = (state: RootState): UserInterface[] =>
+export const selectSearchedUsers = (state: RootState): UsersQueryResult[] =>
   state.users.usersSearch;
 
 export default slice.reducer;
