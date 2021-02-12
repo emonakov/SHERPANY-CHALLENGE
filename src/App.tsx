@@ -18,7 +18,7 @@ const App: FC = () => {
       <BoxRelative
         direction="column"
         justify="center"
-        pad="xlarge"
+        pad="large"
         background="dark-1"
         gap="medium"
       >

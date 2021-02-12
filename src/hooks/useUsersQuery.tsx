@@ -7,10 +7,11 @@ import { useInfiniteQuery } from 'react-query';
 import { InView } from 'react-intersection-observer';
 
 import { addUsersToList, selectUsers } from '../store';
+import { buildUrl } from '../helpers/buildUrl';
 import { UsersQueryResult } from '../StateInterface';
 
-const ALL_USERS = 1000;
-const PER_PAGE = 50;
+const ALL_USERS = Number(process.env.REACT_APP_MAX_USERS);
+const PER_PAGE = Number(process.env.REACT_APP_USERS_PER_PAGE);
 const PAGES = ALL_USERS / PER_PAGE;
 
 const Interceptor = styled(InView)`
@@ -73,7 +74,12 @@ export const useUsersQuery = ({
     'users',
     async ({ pageParam = 1 }) => {
       const res = await axios.get(
-        `https://randomuser.me/api/?results=50&page=${pageParam}&seed=randomuser&nat=${nat}`,
+        buildUrl(String(process.env.REACT_APP_USERS_API), {
+          results: PER_PAGE,
+          page: pageParam,
+          seed: process.env.REACT_APP_USERS_SEEDNAME,
+          nat,
+        }),
       );
 
       return res.data;
