@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Button } from 'grommet';
 import { useInfiniteQuery } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { InView } from 'react-intersection-observer';
 
 import { addUsersToList, selectUsers } from '../store';
@@ -53,9 +52,6 @@ const InterceptorComponent = ({
         ? ''
         : 'No more users to load'}
     </Button>
-    {process.env.NODE_ENV === 'development' && (
-      <ReactQueryDevtools initialIsOpen />
-    )}
   </>
 );
 

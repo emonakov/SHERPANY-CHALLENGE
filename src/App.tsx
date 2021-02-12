@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { grommet, Box, Grommet } from 'grommet';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { UserInterface } from './StateInterface';
 import { useUsersQuery } from './hooks/useUsersQuery';
@@ -29,6 +30,9 @@ const App: FC = () => {
           )}
         {Interceptor}
       </BoxRelative>
+      {process.env.NODE_ENV === 'development' && (
+        <ReactQueryDevtools initialIsOpen />
+      )}
     </Grommet>
   );
 };
