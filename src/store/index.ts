@@ -4,6 +4,8 @@ export {
   searchUsers,
   clearSearch,
   clearUsers,
+  setNat,
+  selectNat,
   selectUsers,
   selectSearchedUsers,
 } from './slice';

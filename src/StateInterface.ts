@@ -48,4 +48,5 @@ export interface UserInterface {
 export interface StateInterface {
   usersList: UsersQueryResult[];
   usersSearch: UsersQueryResult[];
+  nat?: string;
 }

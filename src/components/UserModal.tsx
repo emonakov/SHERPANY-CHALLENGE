@@ -56,7 +56,7 @@ const UserModal: FC = () => {
         round
         width="medium"
       >
-        <CardHeader background="#000000A0" pad="small" width="medium">
+        <CardHeader background="dark-1" pad="small" width="medium">
           <Heading a11yTitle="full name" level="3" margin="small">
             {user.name.title} {user.name.first} {user.name.last}
             <CloseModalIcon
@@ -92,7 +92,7 @@ const UserModal: FC = () => {
           </Box>
         </CardBody>
         <CardFooter
-          background="#000000A0"
+          background="dark-1"
           width="medium"
           justify="start"
           pad="small"

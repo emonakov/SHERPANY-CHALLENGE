@@ -22,7 +22,7 @@ const UserCard: FC<{ user: UserInterface }> = ({ user }) => {
       gap="small"
     >
       <Avatar src={user.picture.thumbnail} />
-      <Text>
+      <Text a11yTitle="full user name">
         {user.name.title} {user.name.first} {user.name.last}
       </Text>
       <Card
@@ -30,8 +30,8 @@ const UserCard: FC<{ user: UserInterface }> = ({ user }) => {
         pad={{ vertical: 'small', horizontal: 'medium' }}
         justify="center"
       >
-        <ColoredText>{user.login.username}</ColoredText>
-        <ColoredText>{user.email}</ColoredText>
+        <ColoredText a11yTitle="login">{user.login.username}</ColoredText>
+        <ColoredText a11yTitle="email">{user.email}</ColoredText>
       </Card>
       <Button
         label="Open"

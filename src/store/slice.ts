@@ -2,12 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { InfiniteData } from 'react-query';
 
 import { StateInterface, UsersQueryResult } from '../StateInterface';
-
+import { getDefaultNat } from '../helpers/settings';
 import { RootState } from './store';
 
 const initialState: StateInterface = {
   usersList: [],
   usersSearch: [],
+  nat: getDefaultNat(),
 };
 
 export const slice = createSlice({
@@ -41,6 +42,10 @@ export const slice = createSlice({
     clearUsers: (state: StateInterface) => {
       state.usersList = [];
     },
+    setNat: (state: StateInterface, action: PayloadAction<string>) => {
+      state.nat = action.payload;
+      localStorage.setItem('nat', action.payload);
+    },
   },
 });
 
@@ -49,11 +54,14 @@ export const {
   searchUsers,
   clearSearch,
   clearUsers,
+  setNat,
 } = slice.actions;
 
 export const selectUsers = (state: RootState): UsersQueryResult[] =>
   state.users.usersList;
 export const selectSearchedUsers = (state: RootState): UsersQueryResult[] =>
   state.users.usersSearch;
+export const selectNat = (state: RootState): string =>
+  state.users.nat as string;
 
 export default slice.reducer;

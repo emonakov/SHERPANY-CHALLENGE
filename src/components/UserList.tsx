@@ -10,7 +10,7 @@ const BoxRelative = styled(Box)`
 `;
 
 const UserList: FC = () => {
-  const { data, Interceptor } = useUsersQuery({ nat: 'ES' });
+  const { data, Interceptor } = useUsersQuery();
   const size = useContext(ResponsiveContext);
 
   return data ? (

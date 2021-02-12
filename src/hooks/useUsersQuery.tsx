@@ -6,7 +6,7 @@ import { Button } from 'grommet';
 import { useInfiniteQuery } from 'react-query';
 import { InView } from 'react-intersection-observer';
 
-import { addUsersToList, selectUsers } from '../store';
+import { addUsersToList, selectNat, selectUsers } from '../store';
 import { buildUrl } from '../helpers/buildUrl';
 import { UsersQueryResult } from '../StateInterface';
 
@@ -20,10 +20,6 @@ const Interceptor = styled(InView)`
   height: 40px;
   bottom: 300vh;
 `;
-
-interface QueryParams {
-  nat?: string;
-}
 
 const InterceptorComponent = ({
   fetchNextPage,
@@ -56,14 +52,13 @@ const InterceptorComponent = ({
   </>
 );
 
-export const useUsersQuery = ({
-  nat = 'ES',
-}: QueryParams): {
+export const useUsersQuery = (): {
   data?: UsersQueryResult[];
   Interceptor: ReactElement;
 } => {
   const dispatch = useDispatch();
   const data = useSelector(selectUsers);
+  const nat = useSelector(selectNat);
   const {
     data: queryData,
     isFetchingNextPage,
