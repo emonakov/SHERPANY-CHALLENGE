@@ -1,9 +1,11 @@
 import { FC, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Box, Grid, ResponsiveContext } from 'grommet';
+import { Box, Button, Grid, ResponsiveContext } from 'grommet';
 
 import UserCard from './UserCard';
 import { useUsersQuery } from '../hooks/useUsersQuery';
+import { selectSearchTerm, selectSearchUsers } from '../store';
 
 const BoxRelative = styled(Box)`
   position: relative;
@@ -11,6 +13,9 @@ const BoxRelative = styled(Box)`
 
 const UserList: FC = () => {
   const { data, Interceptor } = useUsersQuery();
+  const searchUsers = useSelector(selectSearchUsers);
+  const searchTerm = useSelector(selectSearchTerm);
+
   const size = useContext(ResponsiveContext);
 
   return data ? (
@@ -22,13 +27,24 @@ const UserList: FC = () => {
       gap="medium"
     >
       <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
-        {data.map((page) =>
-          page.results.map((user) => (
-            <UserCard key={user.id.value} user={user} />
-          )),
+        {searchTerm && (
+          <>
+            {searchUsers.length > 0 ? (
+              searchUsers.map((user) => <UserCard key={user.id} user={user} />)
+            ) : (
+              <Button disabled>Nothing found</Button>
+            )}
+          </>
+        )}
+        {!searchTerm && data && (
+          <>
+            {data.map((user) => (
+              <UserCard key={user.id} user={user} />
+            ))}
+            {Interceptor}
+          </>
         )}
       </Grid>
-      {Interceptor}
     </BoxRelative>
   ) : null;
 };

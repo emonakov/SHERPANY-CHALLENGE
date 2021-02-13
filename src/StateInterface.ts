@@ -6,8 +6,23 @@ export interface UsersQueryResult {
   };
 }
 
+export interface UserDocInterface {
+  id: string;
+  address: string;
+  city: string;
+  state: string;
+  postcode: number;
+  phone: string;
+  email: string;
+  login: string;
+  name: string;
+  pictureSmall: string;
+  pictureLarge: string;
+  nat: string;
+  country: string;
+}
+
 export interface UserInterface {
-  gender: string;
   id: {
     name: string;
     value: string;
@@ -31,10 +46,6 @@ export interface UserInterface {
   login: {
     username: string;
   };
-  dob: {
-    date: string;
-    age: number;
-  };
   phone: string;
   cell: string;
   picture: {
@@ -46,7 +57,8 @@ export interface UserInterface {
 }
 
 export interface StateInterface {
-  usersList: UsersQueryResult[];
-  usersSearch: UsersQueryResult[];
+  usersList: UserDocInterface[];
+  usersSearch: UserDocInterface[];
   nat?: string;
+  searchTerm?: string;
 }

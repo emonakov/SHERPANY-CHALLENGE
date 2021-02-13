@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { Box, Text, Button, Avatar, Card } from 'grommet';
 
 import { useModal } from '../hooks/useUserModal';
-import { UserInterface } from '../StateInterface';
+import { UserDocInterface } from '../StateInterface';
 
 const ColoredText = styled(Text)`
   color: #746a32;
   font-size: 0.9rem;
 `;
 
-const UserCard: FC<{ user: UserInterface }> = ({ user }) => {
+const UserCard: FC<{ user: UserDocInterface }> = ({ user }) => {
   const { openModal, setUser } = useModal();
 
   return (
@@ -21,16 +21,14 @@ const UserCard: FC<{ user: UserInterface }> = ({ user }) => {
       round
       gap="small"
     >
-      <Avatar src={user.picture.thumbnail} />
-      <Text a11yTitle="full user name">
-        {user.name.title} {user.name.first} {user.name.last}
-      </Text>
+      <Avatar src={user.pictureSmall} />
+      <Text a11yTitle="full user name">{user.name}</Text>
       <Card
         background={{ color: 'light-3' }}
         pad={{ vertical: 'small', horizontal: 'medium' }}
         justify="center"
       >
-        <ColoredText a11yTitle="login">{user.login.username}</ColoredText>
+        <ColoredText a11yTitle="login">{user.login}</ColoredText>
         <ColoredText a11yTitle="email">{user.email}</ColoredText>
       </Card>
       <Button

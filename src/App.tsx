@@ -10,12 +10,18 @@ import Navigation from './components/Navigation';
 import Settings from './components/Settings';
 import UserModalProvider from './hooks/useUserModal';
 
+import Search from './components/Search';
+
 const App: FC = () => {
   return (
     <Grommet full theme={grommet}>
       <UserModalProvider>
         <Router>
-          <Navigation />
+          <Navigation>
+            <Route path="/" exact>
+              <Search />
+            </Route>
+          </Navigation>
           <Switch>
             <Route path="/" exact>
               <UserList />

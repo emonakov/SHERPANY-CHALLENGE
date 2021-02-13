@@ -1,11 +1,12 @@
 export { store } from './store';
 export {
   addUsersToList,
-  searchUsers,
-  clearSearch,
   clearUsers,
   setNat,
   selectNat,
   selectUsers,
-  selectSearchedUsers,
+  usersSearch,
+  clearSearch,
+  selectSearchUsers,
+  selectSearchTerm,
 } from './slice';

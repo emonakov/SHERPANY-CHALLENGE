@@ -6,12 +6,12 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { UserInterface } from '../StateInterface';
+import { UserDocInterface } from '../StateInterface';
 
 interface ModalContextInterface {
   userState: [
-    UserInterface | undefined,
-    Dispatch<SetStateAction<UserInterface | undefined>>,
+    UserDocInterface | undefined,
+    Dispatch<SetStateAction<UserDocInterface | undefined>>,
   ];
   modalState: [boolean, Dispatch<SetStateAction<boolean>>];
 }
@@ -22,7 +22,7 @@ const ModalContext = createContext<ModalContextInterface>({
 });
 
 const UserModalProvider: FC = ({ children }) => {
-  const userState = useState<UserInterface>();
+  const userState = useState<UserDocInterface>();
   const modalState = useState(false);
 
   return (
@@ -49,7 +49,7 @@ const useUserModalContext = (): ModalContextInterface => {
 const useModal = (): {
   closeModal: () => void;
   openModal: () => void;
-  setUser: (user: UserInterface) => void;
+  setUser: (user: UserDocInterface) => void;
 } => {
   const {
     userState: [, setUser],

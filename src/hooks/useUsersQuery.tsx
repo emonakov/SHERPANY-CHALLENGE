@@ -8,7 +8,7 @@ import { InView } from 'react-intersection-observer';
 
 import { addUsersToList, selectNat, selectUsers } from '../store';
 import { buildUrl } from '../helpers/buildUrl';
-import { UsersQueryResult } from '../StateInterface';
+import { UserDocInterface, UsersQueryResult } from '../StateInterface';
 
 const ALL_USERS = Number(process.env.REACT_APP_MAX_USERS);
 const PER_PAGE = Number(process.env.REACT_APP_USERS_PER_PAGE);
@@ -53,7 +53,7 @@ const InterceptorComponent = ({
 );
 
 export const useUsersQuery = (): {
-  data?: UsersQueryResult[];
+  data?: UserDocInterface[];
   Interceptor: ReactElement;
 } => {
   const dispatch = useDispatch();

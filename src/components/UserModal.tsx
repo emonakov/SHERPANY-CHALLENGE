@@ -48,7 +48,7 @@ const UserModal: FC = () => {
     <Modal
       isOpen={isOpen}
       onRequestClose={() => setIsOpen(false)}
-      contentLabel={user?.name.first}
+      contentLabel={user.name}
     >
       <Card
         align="center"
@@ -58,7 +58,7 @@ const UserModal: FC = () => {
       >
         <CardHeader background="dark-1" pad="small" width="medium">
           <Heading a11yTitle="full name" level="3" margin="small">
-            {user.name.title} {user.name.first} {user.name.last}
+            {user.name}
             <CloseModalIcon
               label="⤫"
               onClick={() => setIsOpen(false)}
@@ -78,16 +78,14 @@ const UserModal: FC = () => {
             gap="small"
           >
             <Box>
-              <Avatar src={user.picture.large} size="xlarge" />
+              <Avatar src={user.pictureLarge} size="xlarge" />
             </Box>
             <Box>
-              <Text>
-                {user.location.street.name} {user.location.street.number}
-              </Text>
-              <Text>{user.location.city}</Text>
-              <Text>{user.location.state}</Text>
-              <Text>{user.location.postcode}</Text>
-              <Text>{user.location.country}</Text>
+              <Text>{user.address}</Text>
+              <Text>{user.city}</Text>
+              <Text>{user.state}</Text>
+              <Text>{user.postcode}</Text>
+              <Text>{user.country}</Text>
             </Box>
           </Box>
         </CardBody>
