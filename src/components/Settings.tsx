@@ -28,6 +28,7 @@ const Settings: FC = () => {
           options={options}
           value={nat}
           onChange={onNatChange}
+          a11yTitle="Select nationality to search"
         />
       </FormField>
     </Box>

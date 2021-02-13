@@ -25,7 +25,7 @@ const Navigation: FC = ({ children }) => {
 
   return (
     <StickyHeader background="dark-2" pad="medium">
-      <Box direction="row" align="center" gap="small">
+      <Box direction="row" align="center" gap="small" tag="aside">
         {children}
       </Box>
       <Nav direction="row">

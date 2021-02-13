@@ -20,18 +20,21 @@ const UserCard: FC<{ user: UserDocInterface }> = ({ user }) => {
       background={{ color: 'light-2', opacity: 'strong' }}
       round
       gap="small"
+      tag="article"
+      a11yTitle="A user card"
     >
       <Avatar src={user.pictureSmall} />
-      <Text a11yTitle="full user name">{user.name}</Text>
+      <Text>{user.name}</Text>
       <Card
         background={{ color: 'light-3' }}
         pad={{ vertical: 'small', horizontal: 'medium' }}
         justify="center"
       >
-        <ColoredText a11yTitle="login">{user.login}</ColoredText>
-        <ColoredText a11yTitle="email">{user.email}</ColoredText>
+        <ColoredText>{user.login}</ColoredText>
+        <ColoredText>{user.email}</ColoredText>
       </Card>
       <Button
+        a11yTitle={`Open address data for ${user.name}`}
         label="Open"
         onClick={() => {
           setUser(user);

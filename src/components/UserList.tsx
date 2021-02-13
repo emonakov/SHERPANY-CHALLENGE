@@ -25,8 +25,14 @@ const UserList: FC = () => {
       pad="large"
       background="dark-1"
       gap="medium"
+      tag="main"
+      a11yTitle="Infinite list of users"
     >
-      <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
+      <Grid
+        tag="section"
+        columns={size !== 'small' ? 'medium' : '100%'}
+        gap="large"
+      >
         {searchTerm && (
           <>
             {searchUsers.length > 0 ? (

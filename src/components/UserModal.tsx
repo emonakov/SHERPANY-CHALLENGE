@@ -95,7 +95,9 @@ const UserModal: FC = () => {
           justify="start"
           pad="small"
         >
-          <Text a11yTitle="User's phone number">☎ {user.phone}</Text>
+          <Text a11yTitle={`User's phone number ${user.phone}`}>
+            ☎ {user.phone}
+          </Text>
         </CardFooter>
       </Card>
     </Modal>
