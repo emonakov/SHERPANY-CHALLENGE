@@ -14,7 +14,7 @@ import Search from './components/Search';
 
 const App: FC = () => {
   return (
-    <Grommet full theme={grommet}>
+    <Grommet full theme={grommet} background="dark-1">
       <UserModalProvider>
         <Router>
           <Navigation>
