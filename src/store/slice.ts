@@ -44,10 +44,9 @@ export const slice = createSlice({
       action: PayloadAction<InfiniteData<UsersQueryResult>>,
     ) => {
       miniSearch.removeAll();
-      const users: UserDocInterface[] = [];
-      action.payload.pages.forEach(({ results }) => {
-        results.forEach((user) => {
-          users.push({
+      const users: UserDocInterface[] = action.payload.pages
+        .map(({ results }) =>
+          results.map((user) => ({
             id: user.id.value,
             address: `${user.location.street.name} ${user.location.street.number}`,
             city: user.location.city,
@@ -61,9 +60,9 @@ export const slice = createSlice({
             pictureLarge: user.picture.large,
             nat: user.nat,
             country: user.location.country,
-          });
-        });
-      });
+          })),
+        )
+        .flat();
       state.usersList = users;
       miniSearch.addAll(users);
     },

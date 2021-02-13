@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -54,7 +54,7 @@ const InterceptorComponent = ({
 
 export const useUsersQuery = (): {
   data?: UserDocInterface[];
-  Interceptor: ReactElement;
+  Interceptor: FC;
 } => {
   const dispatch = useDispatch();
   const data = useSelector(selectUsers);
@@ -98,7 +98,7 @@ export const useUsersQuery = (): {
   }, [queryData, dispatch]);
 
   return {
-    Interceptor: (
+    Interceptor: () => (
       <InterceptorComponent
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}

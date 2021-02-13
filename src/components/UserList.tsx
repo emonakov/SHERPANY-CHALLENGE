@@ -47,7 +47,7 @@ const UserList: FC = () => {
             {data.map((user) => (
               <UserCard key={user.id} user={user} />
             ))}
-            {Interceptor}
+            <Interceptor />
           </>
         )}
       </Grid>
