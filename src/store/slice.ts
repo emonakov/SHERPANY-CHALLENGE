@@ -44,6 +44,7 @@ const processUserData = (data: UsersQueryResult) =>
     state: user.location.state,
     postcode: user.location.postcode,
     phone: user.phone,
+    cell: user.cell,
     email: user.email,
     login: user.login.username,
     name: `${user.name.title} ${user.name.first} ${user.name.last}`,
@@ -62,9 +63,10 @@ export const slice = createSlice({
       action: PayloadAction<InfiniteData<UsersQueryResult>>,
     ) => {
       miniSearch.removeAll();
-      const users: UserDocInterface[] = action.payload.pages
-        .map(processUserData)
-        .flat();
+      const users: UserDocInterface[] = action.payload.pages.flatMap(
+        processUserData,
+      );
+
       state.usersList = users;
       miniSearch.addAll(users);
     },
@@ -72,6 +74,7 @@ export const slice = createSlice({
       if (state.usersNextBatch) {
         const newUsers = processUserData(state.usersNextBatch);
         state.usersList = [...state.usersList, ...newUsers];
+        miniSearch.addAll(newUsers);
       }
       state.usersNextBatch = undefined;
     },
@@ -99,9 +102,6 @@ export const slice = createSlice({
       state.nat = action.payload;
       localStorage.setItem('nat', action.payload);
     },
-    setPage: (state: StateInterface, action: PayloadAction<number>) => {
-      state.page = action.payload;
-    },
   },
 });
 
@@ -111,7 +111,6 @@ export const {
   setNat,
   clearSearch,
   usersSearch,
-  setPage,
   addToBatch,
   addUsersFromBatch,
 } = slice.actions;
@@ -124,6 +123,5 @@ export const selectSearchUsers = (state: RootState): UserDocInterface[] =>
   state.users.usersSearch;
 export const selectSearchTerm = (state: RootState): string | undefined =>
   state.users.searchTerm;
-export const selectPage = (state: RootState): number => state.users.page;
 
 export default slice.reducer;

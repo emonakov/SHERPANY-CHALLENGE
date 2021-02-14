@@ -15,8 +15,6 @@ import {
 
 import { useUserModalContext } from '../hooks/useUserModal';
 
-ModalUnstyled.setAppElement('#root');
-
 const Modal = styled(ModalUnstyled)`
   outline: none;
   position: relative;
@@ -49,6 +47,7 @@ const UserModal: FC = () => {
       isOpen={isOpen}
       onRequestClose={() => setIsOpen(false)}
       contentLabel={user.name}
+      ariaHideApp={false}
     >
       <Card
         align="center"
@@ -60,6 +59,7 @@ const UserModal: FC = () => {
           <Heading a11yTitle="full name" level="3" margin="small">
             {user.name}
             <CloseModalIcon
+              a11yTitle="close modal"
               label="⤫"
               onClick={() => setIsOpen(false)}
               size="xsmall"
@@ -98,6 +98,11 @@ const UserModal: FC = () => {
           <Text a11yTitle={`User's phone number ${user.phone}`}>
             ☎ {user.phone}
           </Text>
+          {user.cell && (
+            <Text a11yTitle={`User's cell number ${user.cell}`}>
+              📱 {user.cell}
+            </Text>
+          )}
         </CardFooter>
       </Card>
     </Modal>

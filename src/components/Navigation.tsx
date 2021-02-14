@@ -24,7 +24,7 @@ const Navigation: FC = ({ children }) => {
   const nat = useSelector(selectNat);
 
   return (
-    <StickyHeader background="dark-2" pad="medium">
+    <StickyHeader background="dark-2" pad="medium" data-testid="app-header">
       <Box direction="row" align="center" gap="small" tag="aside">
         {children}
       </Box>

@@ -41,7 +41,9 @@
     "prettier": "prettier '**/*.{ts,tsx}' --write",
     "postinstall": "husky install",
     "eslint": "eslint ./src/**.{ts,tsx} --no-ignore",
-    "ts:check": "tsc -p tsconfig.json --noemit --pretty"
+    "ts:check": "tsc -p tsconfig.json --noemit --pretty",
+    "test:ci": "react-scripts test --watchAll=false --bail",
+    "test:coverage": "react-scripts test --watchAll=false --coverage"
   },
   "eslintConfig": {
     "extends": [

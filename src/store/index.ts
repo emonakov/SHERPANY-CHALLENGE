@@ -9,8 +9,6 @@ export {
   clearSearch,
   selectSearchUsers,
   selectSearchTerm,
-  setPage,
-  selectPage,
   addToBatch,
   addUsersFromBatch,
 } from './slice';

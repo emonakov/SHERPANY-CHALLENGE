@@ -11,8 +11,9 @@ export interface UserDocInterface {
   address: string;
   city: string;
   state: string;
-  postcode: number;
+  postcode: string | number;
   phone: string;
+  cell: string;
   email: string;
   login: string;
   name: string;
@@ -40,7 +41,7 @@ export interface UserInterface {
     city: string;
     state: string;
     country: string;
-    postcode: number;
+    postcode: number | string;
   };
   email: string;
   login: {

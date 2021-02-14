@@ -6,7 +6,9 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
+
 import { UserDocInterface } from '../StateInterface';
+import dummyState from '../helpers/dummy';
 
 interface ModalContextInterface {
   userState: [
@@ -17,8 +19,8 @@ interface ModalContextInterface {
 }
 
 const ModalContext = createContext<ModalContextInterface>({
-  userState: [undefined, (state) => state],
-  modalState: [false, (state) => state],
+  userState: [undefined, dummyState],
+  modalState: [false, dummyState],
 });
 
 const UserModalProvider: FC = ({ children }) => {
@@ -37,17 +39,10 @@ const UserModalProvider: FC = ({ children }) => {
   );
 };
 
-const useUserModalContext = (): ModalContextInterface => {
-  const state = useContext(ModalContext);
-  if (state === undefined) {
-    throw new Error('useContextState must be used within a Provider');
-  }
-
-  return state;
-};
+const useUserModalContext = (): ModalContextInterface =>
+  useContext(ModalContext);
 
 const useModal = (): {
-  closeModal: () => void;
   openModal: () => void;
   setUser: (user: UserDocInterface) => void;
 } => {
@@ -57,7 +52,6 @@ const useModal = (): {
   } = useUserModalContext();
 
   return {
-    closeModal: () => setIsModalOpen(false),
     openModal: () => setIsModalOpen(true),
     setUser,
   };

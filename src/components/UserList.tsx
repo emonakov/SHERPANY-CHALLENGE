@@ -18,7 +18,7 @@ const UserList: FC = () => {
 
   const size = useContext(ResponsiveContext);
 
-  return data ? (
+  return data && data.length > 0 ? (
     <BoxRelative
       direction="column"
       justify="center"
@@ -30,8 +30,9 @@ const UserList: FC = () => {
     >
       <Grid
         tag="section"
-        columns={size !== 'small' ? 'medium' : '100%'}
+        columns={size}
         gap="large"
+        a11yTitle={searchTerm ? 'user searching list' : 'user list'}
       >
         {searchTerm && (
           <>
