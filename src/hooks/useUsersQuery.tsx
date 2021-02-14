@@ -6,7 +6,13 @@ import { Button } from 'grommet';
 import { useInfiniteQuery } from 'react-query';
 import { InView } from 'react-intersection-observer';
 
-import { addUsersToList, selectNat, selectUsers } from '../store';
+import {
+  addUsersToList,
+  selectNat,
+  selectUsers,
+  addUsersFromBatch,
+  addToBatch,
+} from '../store';
 import { buildUrl } from '../helpers/buildUrl';
 import { UserDocInterface, UsersQueryResult } from '../StateInterface';
 
@@ -26,11 +32,13 @@ const InterceptorComponent = ({
   isFetchingNextPage,
   hasNextPage,
   isLoading,
+  isError,
 }: {
   fetchNextPage: () => void;
   isFetchingNextPage: boolean;
   hasNextPage?: boolean;
   isLoading: boolean;
+  isError: boolean;
 }) => (
   <>
     <Interceptor
@@ -47,6 +55,8 @@ const InterceptorComponent = ({
         ? 'Loading...'
         : hasNextPage
         ? ''
+        : isError
+        ? 'Something went wrong'
         : 'No more users to load'}
     </Button>
   </>
@@ -62,9 +72,12 @@ export const useUsersQuery = (): {
   const {
     data: queryData,
     isFetchingNextPage,
+    isFetched,
     isLoading,
+    hasPreviousPage,
     fetchNextPage,
     hasNextPage,
+    isError,
   } = useInfiniteQuery<UsersQueryResult>(
     'users',
     async ({ pageParam = 1 }) => {
@@ -80,22 +93,41 @@ export const useUsersQuery = (): {
       return res.data;
     },
     {
-      getNextPageParam: (firstPageData) => {
-        const page =
-          firstPageData.info.page < PAGES
-            ? firstPageData.info.page + 1
-            : undefined;
-
-        return page;
-      },
+      getNextPageParam: (firstPageData) =>
+        firstPageData.info.page < PAGES
+          ? firstPageData.info.page + 1
+          : undefined,
+      getPreviousPageParam: (lastPageData, allPages) =>
+        lastPageData.info.page < allPages[allPages.length - 1].info.page
+          ? allPages[allPages.length - 1].info.page - 1
+          : undefined,
     },
   );
 
   useEffect(() => {
     if (queryData) {
-      dispatch(addUsersToList(queryData));
+      if (!hasPreviousPage) {
+        dispatch(addUsersToList(queryData));
+        fetchNextPage();
+      }
+      if (hasPreviousPage && isFetched) {
+        dispatch(addToBatch(queryData));
+      }
     }
-  }, [queryData, dispatch]);
+  }, [
+    queryData,
+    dispatch,
+    hasPreviousPage,
+    fetchNextPage,
+    hasNextPage,
+    isFetched,
+  ]);
+
+  useEffect(() => {
+    if (isFetchingNextPage && hasPreviousPage) {
+      dispatch(addUsersFromBatch());
+    }
+  }, [dispatch, hasPreviousPage, isFetchingNextPage]);
 
   return {
     Interceptor: () => (
@@ -104,6 +136,7 @@ export const useUsersQuery = (): {
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isLoading={isLoading}
+        isError={isError}
       />
     ),
     data,

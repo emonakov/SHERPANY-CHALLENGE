@@ -61,4 +61,6 @@ export interface StateInterface {
   usersSearch: UserDocInterface[];
   nat?: string;
   searchTerm?: string;
+  page: number;
+  usersNextBatch?: UsersQueryResult;
 }

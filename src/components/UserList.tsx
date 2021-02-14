@@ -42,15 +42,11 @@ const UserList: FC = () => {
             )}
           </>
         )}
-        {!searchTerm && data && (
-          <>
-            {data.map((user) => (
-              <UserCard key={user.id} user={user} />
-            ))}
-            <Interceptor />
-          </>
-        )}
+        {!searchTerm &&
+          data &&
+          data.map((user) => <UserCard key={user.id} user={user} />)}
       </Grid>
+      {!searchTerm && data && <Interceptor />}
     </BoxRelative>
   ) : null;
 };
