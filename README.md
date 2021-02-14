@@ -3,6 +3,29 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Libraries
+
+### redux-toolkit
+Getting rid of the boilerplate
+### react-query
+Working with the network state
+### react-router
+Application routing
+### axios
+Http calls
+### minisearch
+Full text client-side engine
+### react-intersection-observer
+To follow the infinite scroll
+### Husky
+For git hooks and running checks
+
+## Design system
+
+### Styled-components
+### Grommet v2
+Design system based on styled components
+
 ## Preconditions
 
 ### Copy .env.example to .env
@@ -11,6 +34,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+    
+### `yarn prettier`
+
+To make code look pretty
+
+### `yarn postinstall`
+
+It runs automatically every time npm or yarn installs project's dependencies
+
+### `yarn ts:check`
+
+Checks the quality of the typescript code based on the tsconfig.ts
+
+### `yarn test:ci`
+
+Runs tests in the CI environment
+
+### `yarn test:coverage`
+
+Creates coverage istanbul.js coverage report and saves it into `coverage` directory
 
 ### `yarn start`
 
