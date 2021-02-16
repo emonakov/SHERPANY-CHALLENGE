@@ -41,7 +41,7 @@
     "postinstall": "husky install",
     "eslint": "eslint ./src/**.{ts,tsx} --no-ignore",
     "ts:check": "tsc -p tsconfig.json --noemit --pretty",
-    "test:ci": "react-scripts test --watchAll=false --bail",
+    "test:ci": "react-scripts test --watchAll=false --bail --verbose",
     "test:coverage": "react-scripts test --watchAll=false --coverage"
   },
   "eslintConfig": {

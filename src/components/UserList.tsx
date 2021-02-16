@@ -6,6 +6,7 @@ import { Box, Button, Grid, ResponsiveContext } from 'grommet';
 import UserCard from './UserCard';
 import { useUsersQuery } from '../hooks/useUsersQuery';
 import { selectSearchTerm, selectSearchUsers } from '../store';
+import UserListMemo from './UserListMemo';
 
 const BoxRelative = styled(Box)`
   position: relative;
@@ -18,7 +19,7 @@ const UserList: FC = () => {
 
   const size = useContext(ResponsiveContext);
 
-  return data && data.length > 0 ? (
+  return data ? (
     <BoxRelative
       direction="column"
       justify="center"
@@ -43,11 +44,9 @@ const UserList: FC = () => {
             )}
           </>
         )}
-        {!searchTerm &&
-          data &&
-          data.map((user) => <UserCard key={user.id} user={user} />)}
+        {!searchTerm && data && <UserListMemo users={data} />}
       </Grid>
-      {!searchTerm && data && <Interceptor />}
+      {!searchTerm && <Interceptor />}
     </BoxRelative>
   ) : null;
 };

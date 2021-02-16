@@ -54,7 +54,7 @@ const InterceptorComponent = ({
       {isFetchingNextPage || isLoading
         ? 'Loading...'
         : hasNextPage
-        ? 'Loading...'
+        ? ''
         : isError
         ? 'Something went wrong'
         : 'No more users to load'}

@@ -7,7 +7,7 @@ import { getResults } from '../__mocks__/usersResponse';
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-describe('Home page entry', () => {
+describe('Settings page', () => {
   const mockAxiosResponse = (nat: string, isError = false) => {
     if (!isError) {
       mockAxios.get
