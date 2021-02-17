@@ -19,7 +19,7 @@ const UserList: FC = () => {
 
   const size = useContext(ResponsiveContext);
 
-  return data ? (
+  return (
     <BoxRelative
       direction="column"
       justify="center"
@@ -48,7 +48,7 @@ const UserList: FC = () => {
       </Grid>
       {!searchTerm && <Interceptor />}
     </BoxRelative>
-  ) : null;
+  );
 };
 
 export default UserList;

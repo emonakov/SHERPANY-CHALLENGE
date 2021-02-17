@@ -37,6 +37,7 @@ describe('Home page entry', () => {
     expect(screen.getByLabelText('navigate to home page')).toBeInTheDocument();
     expect(screen.getByLabelText('navigate to settings')).toBeInTheDocument();
     expect(screen.getByText('ES')).toBeInTheDocument();
+    expect(screen.queryByLabelText('A user card')).not.toBeInTheDocument();
   });
 
   it('should load the list of users', async () => {
