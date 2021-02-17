@@ -133,7 +133,10 @@ export const useUsersQuery = (): {
     Interceptor: () => (
       <InterceptorComponent
         isFetchingNextPage={isFetchingNextPage}
-        fetchNextPage={fetchNextPage}
+        fetchNextPage={() => {
+          dispatch(addUsersFromBatch());
+          fetchNextPage();
+        }}
         hasNextPage={hasNextPage}
         isLoading={isLoading}
         isError={isError}
