@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button } from 'grommet';
 import { useInfiniteQuery } from 'react-query';
 import { InView } from 'react-intersection-observer';
+import ReactLoading from 'react-loading';
 
 import {
   addUsersToList,
@@ -25,6 +26,14 @@ const Interceptor = styled(InView)`
   width: 40px;
   height: 40px;
   bottom: 300vh;
+`;
+
+const LoadingIndicator = styled(ReactLoading)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: ${({ theme }) => theme.global.colors['accent-1']};
+  border-radius: 50%;
 `;
 
 const InterceptorComponent = ({
@@ -50,15 +59,15 @@ const InterceptorComponent = ({
       <div />
     </Interceptor>
 
-    <Button disabled>
-      {isFetchingNextPage || isLoading
-        ? 'Loading...'
-        : hasNextPage
-        ? ''
-        : isError
-        ? 'Something went wrong'
-        : 'No more users to load'}
-    </Button>
+    {isFetchingNextPage || isLoading ? (
+      <LoadingIndicator type="spin" />
+    ) : hasNextPage ? (
+      ''
+    ) : isError ? (
+      <Button disabled>Something went wrong</Button>
+    ) : (
+      <Button disabled>No more users to load</Button>
+    )}
   </>
 );
 
